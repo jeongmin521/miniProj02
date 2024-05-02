@@ -6,27 +6,25 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 
-/*
- * MVC 
- * Model : B/L 로직을 구현하는 부분(service + dao)  
- * View  : 출력(jsp) 
- * Controller : model와 view에 대한 제어를 담당 
- */
 @Service
 @Slf4j
 public class MemberService implements UserDetailsService {
       
 	@Autowired
 	private MemberMapper memberMapper;
-
+//	@Autowired
+//	private PasswordEncoder passwordEncoder;
+	
+	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	
 	public static void main(String [] args) {
 		BCryptPasswordEncoder bcryptPasswordEncoder = new BCryptPasswordEncoder();
 		System.out.println(bcryptPasswordEncoder.encode("1004"));
-		System.out.println(bcryptPasswordEncoder.encode("0123456789010234567890123456789"));
 	}
 
 	@Override
@@ -42,5 +40,12 @@ public class MemberService implements UserDetailsService {
 		memberMapper.loginCountInc(resultVO);
 		
 		return resultVO;
+	}
+	
+	public int join(MemberVO member) {
+		// 비밀번호 암호화
+		member.hashPassword(passwordEncoder);
+		int result = memberMapper.join(member);
+		return result;
 	}
 }

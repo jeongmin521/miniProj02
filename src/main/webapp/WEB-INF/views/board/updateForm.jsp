@@ -40,7 +40,7 @@
     <h1>
         게시물 수정 수정양식 
     </h1>
-    <form id="rForm" action="" method="post">
+    <form id="rForm" method="post">
     
         <label>게시물 번호: </label> <input type="text" id="bno" name="bno" value="${board.bno}" readonly="readonly"> <br/>
         <label>제목 : </label><input type="text" id="btitle" name="btitle" value="${board.btitle}"><br/>

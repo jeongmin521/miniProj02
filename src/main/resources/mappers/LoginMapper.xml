@@ -31,7 +31,6 @@
 		where member_id = #{member_id} 
 	</update> 
 
-	 
 	<update id="loginCountClear">
 		update tb_member2 set 
 			 member_login_count = 0 

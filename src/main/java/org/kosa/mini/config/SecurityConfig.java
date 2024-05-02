@@ -16,6 +16,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -38,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	// 회원 비밀번호 등록시 해당 메서드를 이용하여 암호화해야 로그인 처리시 동일한 해시로 비교한다.
 	// 의존성 주입을 위한 함수를 Bean 객체로 리턴할 수 있게 함수를 구현한다 
 	@Bean
-	public BCryptPasswordEncoder encryptPassword() {
+	public PasswordEncoder encryptPassword() {
 		return new BCryptPasswordEncoder();
 	}
 	
@@ -57,10 +58,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		 쿠키를 생성할 때 HttpOnly 태그를 사용하면 클라이언트 스크립트가 보호된 쿠키에 액세스하는 위험을 줄일 수 있으므로 쿠키의 보안을 강화할 수 있다.
 		*/
 		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-		
+
         http//.csrf().disable()	// csrf 토큰을 비활성화
     	.authorizeRequests() // 요청 URL에 따라 접근 권한을 설정
-		.antMatchers("/", "/login/loginForm", "/js/**","/css/**","/image/**").permitAll() // 해당 경로들은 접근을 허용
+		.antMatchers("/", "/login/loginForm", "/member/joinForm","/member/join", "/resources/js/*","/resources/css/*","/image/*").permitAll() // 해당 경로들은 접근을 허용
 		.anyRequest() // 다른 모든 요청은
 		.authenticated() // 인증된 유저만 접근을 허용
 	.and()
@@ -86,5 +87,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .expiredUrl("/login/loginForm?error=true&exception=" + URLEncoder.encode("세션이 만료되었습니다. 다시 로그인 해주세요", "UTF-8"))  // 세션이 만료된 경우 이동 할 페이지를 지정
     ;
 	}
-
 }

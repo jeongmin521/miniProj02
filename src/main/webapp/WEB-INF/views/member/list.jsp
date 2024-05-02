@@ -14,7 +14,7 @@
     <%@ include file="/WEB-INF/views/include/header.jsp" %>
 </head>
 <body>
-	<h1>게시물목록</h1>
+	<h1>회원 목록</h1>
 	<sec:authorize access="isAuthenticated()">
 		<sec:authentication property="principal" var="principal"/>
 	</sec:authorize>
@@ -36,17 +36,19 @@
    
     <table border="1">
         <tr>
-            <th>게시물번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
+            <th>이름</th>
+            <th>id</th>
+            <th>성별</th>
+            <th>주소</th>
+            <th>연락처</th>
         </tr>
-        <c:forEach var="board" items="${pageResponseVO.list}">
+        <c:forEach var="member" items="${pageResponseVO.list}">
         <tr>
-            <td onclick="jsView('${board.bno}')"  style="cursor:pointer;">${board.bno}</td>
-            <td><a href="view?bno=${board.bno}">${board.btitle}</a></td>
-            <td>${board.bwriter}</td>
-            <td>${board.bdate}</td>
+            <td onclick="jsView('${member.id}')"  style="cursor:pointer;">${board.id}</td>
+            <td><a href="view?id=${member_name}">${member_name}</a></td>
+            <td>${member.member_gender}</td>
+            <td>${member.member_address}</td>
+            <td>${member_phone_number}</td>
         </tr>
         </c:forEach>
     </table>

@@ -31,6 +31,24 @@
 				</otherwise>
 			</choose>
 		where member_id = #{member_id} 
-	</update> 
+	</update>
+	
+	<insert id="join" >
+		insert into tb_member2 (
+			member_id,
+			member_pwd,
+			member_name,
+			member_phone_number,
+			member_address,
+			member_gender
+		) values (
+			#{member_id},
+			#{member_pwd},
+			#{member_name},
+			#{member_phone_number},
+			#{member_address},
+			#{member_gender}
+		) 
+	</insert>
 	
 </mapper>

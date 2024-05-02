@@ -8,6 +8,7 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +23,7 @@ public class MemberVO implements UserDetails {
 	
 	private String member_id;
 	private String member_pwd;
+	private String member_pwd2;
 	private String member_name;
 	private String member_address;
 	private String member_phone_number;
@@ -35,6 +37,12 @@ public class MemberVO implements UserDetails {
 	public boolean isEqualsPwd(String pwd) {
 		return this.member_pwd.equals(pwd);		
 	}
+	
+	public void hashPassword(PasswordEncoder passwordEncoder) {
+		this.member_pwd = passwordEncoder.encode(this.member_pwd);
+	}
+	
+	
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

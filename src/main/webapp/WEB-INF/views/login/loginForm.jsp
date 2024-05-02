@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<!-- 오그인시 오류 메시지 출력 -->
+<!-- 로그인시 오류 메시지 출력 -->
 
 <form action="/login" method="post">
 	<%-- csrf 토큰 설정 --%>
