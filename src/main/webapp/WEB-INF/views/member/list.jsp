@@ -18,22 +18,21 @@
 	<sec:authorize access="isAuthenticated()">
 		<sec:authentication property="principal" var="principal"/>
 	</sec:authorize>
-	<h3>이름 : ${principal.member_name}</h3>
     <form id="searchForm" action="list" method="post" >
         <select id="size" name="size" >
         	<c:forEach var="size" items="${sizes}">
         		<option value="${size.codeid}" ${pageRequestVO.size == size.codeid ? 'selected' : ''} >${size.name}</option>
         	</c:forEach>
         </select>
-    	<label>제목</label>
+    	<label>이름</label>
     	<input type="text" id="searchKey" name="searchKey" value="${param.searchKey}">
     	<input type="submit" value="검색">
     </form>
-    
-    <form id="listForm" action="view" method="post">
-    	<input type="hidden" id="bno" name="bno" >
-    </form>
    
+    <form id="listForm" action="view" method="post">
+    	<input type="hidden" id="member_id" name="member_id" >
+    </form>
+    
     <table border="1">
         <tr>
             <th>이름</th>
@@ -44,11 +43,11 @@
         </tr>
         <c:forEach var="member" items="${pageResponseVO.list}">
         <tr>
-            <td onclick="jsView('${member.id}')"  style="cursor:pointer;">${board.id}</td>
-            <td><a href="view?id=${member_name}">${member_name}</a></td>
+        	<td>${member.member_name}</td>
+            <td>${member_id}</td>
             <td>${member.member_gender}</td>
             <td>${member.member_address}</td>
-            <td>${member_phone_number}</td>
+            <td>${member.member_phone_number}</td>
         </tr>
         </c:forEach>
     </table>
@@ -101,9 +100,9 @@ document.querySelector("#size").addEventListener("change", e => {
     searchForm.submit();
 });
 
-function jsView(bno) {
+function jsView(member_id) {
 	//인자의 값을 설정한다 
-	bno.value = bno;
+	member_id.value = member_id;
 	
 	//양식을 통해서 서버의 URL로 값을 전달한다
 	listForm.submit();

@@ -1,10 +1,18 @@
 package org.kosa.mini.member;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletException;
+import javax.validation.Valid;
+
+import org.kosa.mini.code.CodeService;
 import org.kosa.mini.entity.MemberVO;
+import org.kosa.mini.page.PageRequestVO;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 
 	private final MemberService memberService;
+	private final CodeService codeService;
 
 	@GetMapping("/joinForm")
 	public String joinForm() {
@@ -35,7 +44,7 @@ public class MemberController {
 		int updated = memberService.join(memberVO);
 		if (updated == 1) { //성공
 			result.put("status", 0);
-		}else {f
+		}else {
 			result.put("status", -99);
 			result.put("statusMessage", "회원가입 실패하였습니다");
 		}
@@ -43,8 +52,18 @@ public class MemberController {
 	}
 	
 	
-	@GetMapping("/list")
-	public String list() {
+	@RequestMapping("/list")
+	public String list(@Valid PageRequestVO pageRequestVO, BindingResult bindingResult, Model model) throws ServletException, IOException {
+		log.info("회원목록");
+		
+		log.info(pageRequestVO.toString());
+
+        if(bindingResult.hasErrors()){
+        	pageRequestVO = PageRequestVO.builder().build();
+        }
+		model.addAttribute("pageResponseVO", memberService.getList(pageRequestVO));
+		model.addAttribute("sizes", codeService.getList());
+		
 		return "member/list";
 	}
 	

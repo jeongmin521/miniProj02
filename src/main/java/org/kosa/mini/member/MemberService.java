@@ -1,6 +1,11 @@
 package org.kosa.mini.member;
 
+import java.util.List;
+
+import org.kosa.mini.entity.BoardVO;
 import org.kosa.mini.entity.MemberVO;
+import org.kosa.mini.page.PageRequestVO;
+import org.kosa.mini.page.PageResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -47,5 +52,15 @@ public class MemberService implements UserDetailsService {
 		member.hashPassword(passwordEncoder);
 		int result = memberMapper.join(member);
 		return result;
+	}
+	
+	public PageResponseVO<MemberVO> getList(PageRequestVO pageRequestVO) {
+    	List<MemberVO> list = memberMapper.getList(pageRequestVO);
+        int total = memberMapper.getTotalCount(pageRequestVO);
+        
+        log.info("list {} ", list);
+        log.info("total  = {} ", total);
+
+        return new PageResponseVO<MemberVO>(list, total, pageRequestVO.getSize(), pageRequestVO.getPageNo());
 	}
 }

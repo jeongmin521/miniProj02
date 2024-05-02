@@ -41,8 +41,6 @@ public class MemberVO implements UserDetails {
 	public void hashPassword(PasswordEncoder passwordEncoder) {
 		this.member_pwd = passwordEncoder.encode(this.member_pwd);
 	}
-	
-	
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -85,4 +83,3 @@ public class MemberVO implements UserDetails {
 		return true;
 	}
 }
-
