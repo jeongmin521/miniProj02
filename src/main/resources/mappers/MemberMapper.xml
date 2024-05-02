@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.kosa.mini.member.MemberMapper">
+
+    <sql id="search">
+        <where>
+            <if test="searchKey != null and searchKey != ''">
+                btitle like concat('%', #{searchKey}, '%')
+            </if>
+        </where>
+    </sql>
+    
+	<select id="login" resultType="MemberVO">
+		select 
+			*  
+		from tb_member2   
+		where member_id = #{member_id}
+	</select>
+	
+	<update id="loginCountInc">
+		update tb_member2 set 
+			member_login_count = member_login_count + 1
+			<choose>
+				<when test="member_login_count > 3">
+					, member_account_locked = 'Y'
+				</when>
+				<otherwise>
+					, member_account_locked = 'N'
+				</otherwise>
+			</choose>
+		where member_id = #{member_id} 
+	</update> 
+	
+</mapper>
