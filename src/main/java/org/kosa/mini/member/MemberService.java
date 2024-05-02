@@ -63,4 +63,11 @@ public class MemberService implements UserDetailsService {
 
         return new PageResponseVO<MemberVO>(list, total, pageRequestVO.getSize(), pageRequestVO.getPageNo());
 	}
+	
+	public MemberVO view(MemberVO member)  {
+		MemberVO resultVO = memberMapper.view(member);
+		log.info(resultVO.toString());
+		
+		return resultVO;
+	}
 }

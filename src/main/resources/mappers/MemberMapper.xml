@@ -64,5 +64,12 @@
 		from tb_member2
 		<include refid="search"/>
     </select>
+    
+    <select id="view" resultType="MemberVO">
+		select 
+			*
+		from tb_member2
+		where member_id = #{member_id}
+	</select>
 	
 </mapper>

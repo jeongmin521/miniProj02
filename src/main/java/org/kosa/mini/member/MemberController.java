@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.validation.Valid;
 
 import org.kosa.mini.code.CodeService;
+import org.kosa.mini.entity.BoardVO;
 import org.kosa.mini.entity.MemberVO;
 import org.kosa.mini.page.PageRequestVO;
 import org.springframework.stereotype.Controller;
@@ -65,6 +66,15 @@ public class MemberController {
 		model.addAttribute("sizes", codeService.getList());
 		
 		return "member/list";
+	}
+	
+	@GetMapping("/view")
+	public String view(MemberVO member, Model model) throws ServletException, IOException {
+		log.info("상세보기");
+		
+		model.addAttribute("member", memberService.view(member));
+		
+		return "member/view";
 	}
 	
 }
