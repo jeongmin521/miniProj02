@@ -10,6 +10,7 @@
     <title>게시물 상세보기</title>
     <%@ include file="/WEB-INF/views/include/css.jsp" %>
     <%@ include file="/WEB-INF/views/include/js.jsp" %>
+    <%@ include file="/WEB-INF/views/include/meta.jsp" %>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -56,14 +57,10 @@ function jsUpdateForm() {
 	<form id="viewForm" method="post" action="view">
 		<input type="hidden" name="bno" value="${board.bno}">
 		<input type="button" value="삭제" onclick="jsDelete()">
-		<input type="button" value="수정" onclick="jsUpdateForm()">
+		<input type="button" value="수정" onclick="location.href='updateForm?bno=${board.bno}'">
+		<input type="button" value="목록" onclick ="location.href='list'">
 	</form>     
 
-    <div>
-        <a href="list">목록</a>
-        <a href="updateForm?bno=${board.bno}">수정</a>
-        <a href="delete?bno=${board.bno}">삭제</a>
-    </div>
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>

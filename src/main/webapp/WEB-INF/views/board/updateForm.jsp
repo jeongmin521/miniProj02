@@ -52,40 +52,16 @@
     
     </form>
 <script type="text/javascript">
-	//상단 메뉴에서 게시물이 선택되게 함  
-	menuActive("board_link");
-	const csrfParameter = document.querySelector("meta[name='_csrf_parameter']").content;
-	const csrfToken = document.querySelector("meta[name='_csrf']").content;
-	//이미지 업로드 URL
-	const board_image_url = "<c:url value='/board/boardImageUpload?board_token=${board_token}&'/>" + csrfParameter + "=" + csrfToken;
-
-	//cfeditor관련 설정 
-	let bcontent; //cfeditor의 객체를 저장하기 위한 변수 
-	ClassicEditor.create(document.querySelector('#bcontent'),{
-		//이미지 업로드 URL을 설정한다 
-		ckfinder: {
-			uploadUrl : board_image_url
-		}
-	})
-	.then(editor => {
-		console.log('Editor was initialized');
-		//ckeditor객체를 전역변수 bcontent에 설정함 
-		window.bcontent = editor;
-	})
-	.catch(error => {
-		console.error(error);
-	});
-
     const rForm = document.getElementById("rForm");
     rForm.addEventListener("submit", e => {
     	//서버에 form data를 전송하지 않는다 
     	e.preventDefault();
     	
-		myFileFetch("insert", "rForm", json => {
+		myFetch("update", "rForm", json => {
 			switch(json.status) {
 			case 0:
 				//성공
-				alert("게시물을 등록 하였습니다");
+				alert("게시물을 수정하였습니다");
 				location = "list";
 				break;
 			default:
