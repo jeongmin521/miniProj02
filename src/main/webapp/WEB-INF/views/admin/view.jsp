@@ -24,6 +24,8 @@
       <label>연락처 : ${member.member_phone_number}</label><br/>
       <label>성별 : ${member.member_gender}</label><br/>
       <label>주소 : ${member.member_address}</label><br/>
+      <label>권한 : ${member.member_roles}</label><br/>
+      <label>계정잠금여부 : ${member.member_account_locked}</label><br/>
 
 <script>
 menuActive("member_link");
