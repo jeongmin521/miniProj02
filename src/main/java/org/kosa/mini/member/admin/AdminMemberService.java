@@ -37,6 +37,19 @@ public class AdminMemberService {
 		MemberVO resultVO = adminmemberMapper.view(member);
 		log.info(resultVO.toString());
 		
+		
 		return resultVO;
-	}	
+	}
+	
+	public int delete(MemberVO member)  {
+		return adminmemberMapper.delete(member);
+	}
+	
+	public int lock(MemberVO member)  {
+		return adminmemberMapper.lock(member);
+	}
+	
+	public int auth(MemberVO member)  {
+		return adminmemberMapper.auth(member);
+	}
 }

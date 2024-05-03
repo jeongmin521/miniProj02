@@ -33,4 +33,22 @@
 		where member_id = #{member_id}
 	</select>
 	
+	<delete id="delete" >
+		delete 
+		from tb_member2
+		where member_id = #{member_id}
+	</delete>
+	
+	<update id="lock" >
+		update tb_member2 set 
+		member_account_locked = (case when member_account_locked = 'Y' then 'N' else 'Y' end)
+		where member_id = #{member_id}
+	</update>
+	
+	<update id="auth" >
+		update tb_member2 set 
+		member_roles = (case when member_roles = 'USER' then 'ADMIN' else 'USER' end)
+		where member_id = #{member_id}
+	</update>
+	
 </mapper>

@@ -47,7 +47,7 @@
         <label>내용: </label> <input type="text" id="bcontent" name="bcontent" value="${board.bcontent}"><br/>
 	    <div>
 	        <input type="submit" value="수정">
-	        <a href="javascript:history(-1)">취소</a>
+	        <a href="view?bno=${board.bno}">취소</a>
 	    </div>
     
     </form>

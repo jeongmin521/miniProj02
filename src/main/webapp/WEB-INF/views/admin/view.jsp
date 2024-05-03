@@ -44,6 +44,34 @@ function jsDelete() {
 	}
 }
 
+function jsLock() {
+	if (confirm("회원 계정을 잠금/해제 처리하시겠습니까?")) {
+		myFetch("lock", "viewForm", json => {
+			if(json.status == 0) {
+				//성공
+				alert("회원 계정을 잠금처리 하였습니다");
+				location = "view?member_id=${member.member_id}";
+			} else {
+				alert(json.statusMessage);
+			}
+		});
+	}
+}
+
+function jsAuth() {
+	if (confirm("관리자 권한을 부여/삭제 하시겠습니까?")) {
+		myFetch("auth", "viewForm", json => {
+			if(json.status == 0) {
+				//성공
+				alert("권한 변경처리 하였습니다");
+				location = "view?member_id=${member.member_id}";
+			} else {
+				alert(json.statusMessage);
+			}
+		});
+	}
+}
+
 function jsUpdateForm() {
 	if (confirm("정말로 수정하시겠습니까?")) {
 		//서버의 URL을 설정한다 
@@ -58,7 +86,8 @@ function jsUpdateForm() {
 	<form id="viewForm" method="post" action="view">
 		<input type="hidden" name="member_id" value="${member.member_id}">
 		<input type="button" value="삭제" onclick="jsDelete()">
-		<input type="button" value="수정" onclick="location.href='updateForm?bno=${member.member_id}'">
+		<input type="button" value="잠금/해제" onclick="jsLock()">
+		<input type="button" value="권한 부여/삭제" onclick="jsAuth()">
 		<input type="button" value="목록" onclick ="location.href='list'">
 	</form>     
 

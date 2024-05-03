@@ -16,7 +16,7 @@
    
       <label>이름: ${member.member_name}</label> <br/>
       <label>id : ${member.member_id}</label><br/>
-      <label>비밀번호 : ${member.member_pwd}</label><br/>
+      <label>권한 : ${member.member_roles}</label><br/>
       <label>연락처 : ${member.member_phone_number}</label><br/>
       <label>성별 : ${member.member_gender}</label><br/>
       <label>주소 : ${member.member_address}</label><br/>

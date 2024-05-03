@@ -3,6 +3,7 @@ package org.kosa.mini.member.admin;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.kosa.mini.entity.BoardVO;
 import org.kosa.mini.entity.MemberVO;
 import org.kosa.mini.page.PageRequestVO;
 
@@ -15,4 +16,7 @@ public interface AdminMemberMapper {
 	List<MemberVO> getList(PageRequestVO pageRequestVO);
 	int getTotalCount(PageRequestVO pageRequestVO);
 	MemberVO view(MemberVO memberVO);
+	int delete(MemberVO memberVO);
+	int lock(MemberVO memberVO);
+	int auth(MemberVO memberVO);
 }
