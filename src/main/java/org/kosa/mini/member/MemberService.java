@@ -2,7 +2,6 @@ package org.kosa.mini.member;
 
 import java.util.List;
 
-import org.kosa.mini.entity.BoardVO;
 import org.kosa.mini.entity.MemberVO;
 import org.kosa.mini.page.PageRequestVO;
 import org.kosa.mini.page.PageResponseVO;
@@ -54,20 +53,4 @@ public class MemberService implements UserDetailsService {
 		return result;
 	}
 	
-	public PageResponseVO<MemberVO> getList(PageRequestVO pageRequestVO) {
-    	List<MemberVO> list = memberMapper.getList(pageRequestVO);
-        int total = memberMapper.getTotalCount(pageRequestVO);
-        
-        log.info("list {} ", list);
-        log.info("total  = {} ", total);
-
-        return new PageResponseVO<MemberVO>(list, total, pageRequestVO.getSize(), pageRequestVO.getPageNo());
-	}
-	
-	public MemberVO view(MemberVO member)  {
-		MemberVO resultVO = memberMapper.view(member);
-		log.info(resultVO.toString());
-		
-		return resultVO;
-	}
 }

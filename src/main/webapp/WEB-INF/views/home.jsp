@@ -12,7 +12,7 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	Home
 </h1>
 
 <sec:authorize access="isAuthenticated()">
@@ -28,7 +28,8 @@
 	<c:when test="${principal.member_roles eq 'ADMIN'}">
 		<ul class="navbar-nav">
 			<li class="nav-item"><a class="nav-link" href="/login/logout">로그아웃</a></li>
-			<li class="nav-item"><a class="nav-link" href="/member/list">회원관리</a></li>
+			<li class="nav-item"><a class="nav-link" href="/admin/list">회원관리</a></li>
+			<li class="nav-item"><a class="nav-link" href="/board/list">게시물 목록</a></li>
 		</ul>
 	</c:when>
 	<c:otherwise>

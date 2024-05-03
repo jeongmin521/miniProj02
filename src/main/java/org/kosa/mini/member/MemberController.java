@@ -30,51 +30,25 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 
 	private final MemberService memberService;
-	private final CodeService codeService;
 
 	@GetMapping("/joinForm")
 	public String joinForm() {
 		return "member/joinForm";
 	}
-	
+
 	@PostMapping("/join")
 	@ResponseBody
 	public Map<String, Object> join(@RequestBody MemberVO memberVO) {
 		Map<String, Object> result = new HashMap<>();
-		
+
 		int updated = memberService.join(memberVO);
-		if (updated == 1) { //성공
+		if (updated == 1) { // 성공
 			result.put("status", 0);
-		}else {
+		} else {
 			result.put("status", -99);
 			result.put("statusMessage", "회원가입 실패하였습니다");
 		}
 		return result;
 	}
-	
-	
-	@RequestMapping("/list")
-	public String list(@Valid PageRequestVO pageRequestVO, BindingResult bindingResult, Model model) throws ServletException, IOException {
-		log.info("회원목록");
-		
-		log.info(pageRequestVO.toString());
 
-        if(bindingResult.hasErrors()){
-        	pageRequestVO = PageRequestVO.builder().build();
-        }
-		model.addAttribute("pageResponseVO", memberService.getList(pageRequestVO));
-		model.addAttribute("sizes", codeService.getList());
-		
-		return "member/list";
-	}
-	
-	@GetMapping("/view")
-	public String view(MemberVO member, Model model) throws ServletException, IOException {
-		log.info("상세보기");
-		
-		model.addAttribute("member", memberService.view(member));
-		
-		return "member/view";
-	}
-	
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.kosa.mini.member.admin.AdminMemberMapper">
+
+	<sql id="search">
+        <where>
+            <if test="searchKey != null and searchKey != ''">
+                btitle like concat('%', #{searchKey}, '%')
+            </if>
+        </where>
+    </sql>
+
+	<select id="getList" resultType="MemberVO">
+		select *
+		from tb_member2
+		<include refid="search"/>
+		order by member_name desc limit #{skip}, #{size}
+    </select>
+    
+    <select id="getTotalCount" resultType="int">
+		select 
+			count(*)   
+		from tb_member2
+		<include refid="search"/>
+    </select>
+    
+    <select id="view" resultType="MemberVO">
+		select 
+			*
+		from tb_member2
+		where member_id = #{member_id}
+	</select>
+	
+</mapper>

@@ -3,9 +3,7 @@ package org.kosa.mini.member;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.kosa.mini.entity.BoardVO;
 import org.kosa.mini.entity.MemberVO;
-import org.kosa.mini.page.PageRequestVO;
 
 @Mapper
 public interface MemberMapper {
@@ -19,8 +17,5 @@ public interface MemberMapper {
 	void loginCountClear(String email);
 	//회원가입
 	int join(MemberVO member);
-	//회원 정보 불러오기
-	List<MemberVO> getList(PageRequestVO pageRequestVO);
-	int getTotalCount(PageRequestVO pageRequestVO);
-	MemberVO view(MemberVO memberVO);
+
 }

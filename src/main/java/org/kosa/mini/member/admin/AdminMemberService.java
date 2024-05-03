@@ -1,7 +1,10 @@
 package org.kosa.mini.member.admin;
 
-import org.kosa.mini.entity.BoardVO;
+import java.util.List;
+
 import org.kosa.mini.entity.MemberVO;
+import org.kosa.mini.page.PageRequestVO;
+import org.kosa.mini.page.PageResponseVO;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -18,26 +21,22 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class AdminMemberService {
       
-	private final AdminMemberMapper  memberMapper;
+	private final AdminMemberMapper adminmemberMapper;
+	
+	public PageResponseVO<MemberVO> getList(PageRequestVO pageRequestVO) {
+    	List<MemberVO> list = adminmemberMapper.getList(pageRequestVO);
+        int total = adminmemberMapper.getTotalCount(pageRequestVO);
+        
+        log.info("list {} ", list);
+        log.info("total  = {} ", total);
 
-	public MemberVO login(MemberVO memberVO)  {
-		//view Count의 값이 증가된 객체를 얻는다
-		MemberVO resultVO = memberMapper.login(memberVO);
-		if (resultVO != null && memberVO.isEqualsPwd(resultVO.getMember_pwd())) {
-			return resultVO;
-		}
-		return null;
+        return new PageResponseVO<MemberVO>(list, total, pageRequestVO.getSize(), pageRequestVO.getPageNo());
 	}
 	
+	public MemberVO view(MemberVO member)  {
+		MemberVO resultVO = adminmemberMapper.view(member);
+		log.info(resultVO.toString());
+		
+		return resultVO;
+	}	
 }
-
-
-
-
-
-
-
-
-
-
-
