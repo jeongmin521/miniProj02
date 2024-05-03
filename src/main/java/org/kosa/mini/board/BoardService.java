@@ -45,13 +45,13 @@ public class BoardService {
 
     public PageResponseVO<BoardVO> getList(PageRequestVO pageRequestVO) {
     	List<BoardVO> list = boardMapper.getList(pageRequestVO);
-        int total = boardMapper.getTotalCount(pageRequestVO);
-        
-        log.info("list {} ", list);
-        log.info("total  = {} ", total);
+    	int total = boardMapper.getTotalCount(pageRequestVO);
 
-        return new PageResponseVO<BoardVO>(list, total, pageRequestVO.getSize(), pageRequestVO.getPageNo());
-	}
+    	log.info("list {} ", list);
+    	log.info("total = {} ", total);
+
+    	return PageResponseVO.withAll(list ,total, pageRequestVO.getSize(), pageRequestVO.getPageNo());
+    	}
 	
 	public BoardVO view(BoardVO board, Authentication authentication)  {
 		MemberVO login = (MemberVO) authentication.getPrincipal();
@@ -173,7 +173,6 @@ public class BoardService {
 	public BoardFileVO getBoardFile(int board_file_no) {
 		return boardFileMapper.getBoardFile(board_file_no);
 	}
-	
 	
 	public String getBoardToken() {
 		final String board_token = UUID.randomUUID().toString(); 

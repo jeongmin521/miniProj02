@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <%@ include file="/WEB-INF/views/include/css.jsp" %>
     <%@ include file="/WEB-INF/views/include/js.jsp" %>
+    <%@ include file="/WEB-INF/views/include/meta.jsp" %>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -27,6 +28,7 @@
         </select>
     	<label>제목</label>
     	<input type="text" id="searchKey" name="searchKey" value="${param.searchKey}">
+    	<sec:csrfInput/>
     	<input type="submit" value="검색">
     </form>
     
@@ -40,6 +42,7 @@
             <th>제목</th>
             <th>작성자</th>
             <th>작성일</th>
+            <th>조회수</th>
         </tr>
         <c:forEach var="board" items="${pageResponseVO.list}">
         <tr>
@@ -47,6 +50,7 @@
             <td><a href="view?bno=${board.bno}">${board.btitle}</a></td>
             <td>${board.bwriter}</td>
             <td>${board.bdate}</td>
+            <td>${board.view_count}</td>
         </tr>
         </c:forEach>
     </table>

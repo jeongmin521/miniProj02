@@ -30,7 +30,7 @@ public class AdminMemberService {
         log.info("list {} ", list);
         log.info("total  = {} ", total);
 
-        return new PageResponseVO<MemberVO>(list, total, pageRequestVO.getSize(), pageRequestVO.getPageNo());
+        return PageResponseVO.withAll(list ,total, pageRequestVO.getSize(), pageRequestVO.getPageNo());
 	}
 	
 	public MemberVO view(MemberVO member)  {

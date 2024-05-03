@@ -25,25 +25,28 @@ public class PageResponseVO<E> {
 
     private List<E> list;
 
-    public PageResponseVO(List<E> list, int total, int pageNo, int size){
+    public static <E> PageResponseVO<E> withAll(List<E> list, int total, int pageNo, int size){
 
-        this.pageNo = pageNo;
-        this.size = size;
+    	PageResponseVO pageResponseVO = new PageResponseVO<E>();
 
-        this.total = total;
-        this.list = list;
+    	pageResponseVO.pageNo = pageNo;
+    	pageResponseVO.size = size;
 
-        this.end = (int)(Math.ceil(this.pageNo / 10.0 )) * 10;
+    	pageResponseVO.total = total;
+    	pageResponseVO.list = list;
 
-        this.start = this.end - 9;
+    	pageResponseVO.end = (int)(Math.ceil(pageResponseVO.pageNo / 10.0 )) * 10;
 
-        int last =  (int)(Math.ceil((total/(double)size)));
+    	pageResponseVO.start = pageResponseVO.end - 9;
 
-        this.end =  end > last ? last: end;
+    	int last = (int)(Math.ceil((total/(double)size)));
 
-        this.prev = this.start > 1;
+    	pageResponseVO.end = pageResponseVO.end > last ? last: pageResponseVO.end;
 
-        this.next =  total > this.end * this.size;
+    	pageResponseVO.prev = pageResponseVO.start > 1;
 
+    	pageResponseVO.next = total > pageResponseVO.end * pageResponseVO.size;
+
+    	return pageResponseVO;
+    	}
     }
-}

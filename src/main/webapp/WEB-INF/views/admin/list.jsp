@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <%@ include file="/WEB-INF/views/include/css.jsp" %>
     <%@ include file="/WEB-INF/views/include/js.jsp" %>
+    <%@ include file="/WEB-INF/views/include/meta.jsp" %>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -22,10 +23,11 @@
         <select id="size" name="size" >
         	<c:forEach var="size" items="${sizes}">
         		<option value="${size.codeid}" ${pageRequestVO.size == size.codeid ? 'selected' : ''} >${size.name}</option>
-        	</c:forEach>
+        	</c:forEach> 
         </select>
     	<label>이름</label>
     	<input type="text" id="searchKey" name="searchKey" value="${param.searchKey}">
+    	<sec:csrfInput/>
     	<input type="submit" value="검색">
     </form>
    
