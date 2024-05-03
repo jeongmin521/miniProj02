@@ -12,8 +12,10 @@ import java.util.stream.Collectors;
 import org.kosa.mini.entity.BoardFileVO;
 import org.kosa.mini.entity.BoardImageFileVO;
 import org.kosa.mini.entity.BoardVO;
+import org.kosa.mini.entity.MemberVO;
 import org.kosa.mini.page.PageRequestVO;
 import org.kosa.mini.page.PageResponseVO;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -51,12 +53,11 @@ public class BoardService {
         return new PageResponseVO<BoardVO>(list, total, pageRequestVO.getSize(), pageRequestVO.getPageNo());
 	}
 	
-	public BoardVO view(BoardVO board)  {
-		//view Count의 값을 증가한다. 
-		//만약 값을 증가 하지 못하면 게시물이 존재하지 않는 경우임  
-		if (0 == boardMapper.incViewCount(board)) {
-			return null; 
-		}
+	public BoardVO view(BoardVO board, Authentication authentication)  {
+		MemberVO login = (MemberVO) authentication.getPrincipal();
+		board.setMember_id(login.getMember_id());
+		boardMapper.incViewCount(board);
+		
 		//view Count의 값이 증가된 객체를 얻는다
 		BoardVO resultVO = boardMapper.view(board);
 		log.info(resultVO.getView_count());

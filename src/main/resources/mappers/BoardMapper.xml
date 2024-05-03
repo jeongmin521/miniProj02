@@ -37,7 +37,7 @@
 	<update id="incViewCount" >
 		update tb_board set
 			 view_count = view_count + 1
-		where bno = #{bno}
+		where bno = #{bno} and member_id != #{member_id}  
 	</update>
 	
 	<delete id="delete" >

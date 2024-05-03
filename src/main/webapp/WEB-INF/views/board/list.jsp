@@ -43,7 +43,7 @@
         </tr>
         <c:forEach var="board" items="${pageResponseVO.list}">
         <tr>
-            <td onclick="jsView('${board.bno}')"  style="cursor:pointer;">${board.bno}</td>
+            <td>${board.bno}</td>
             <td><a href="view?bno=${board.bno}">${board.btitle}</a></td>
             <td>${board.bwriter}</td>
             <td>${board.bdate}</td>

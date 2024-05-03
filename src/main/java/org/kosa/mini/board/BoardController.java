@@ -57,30 +57,27 @@ public class BoardController {
         	pageRequestVO = PageRequestVO.builder().build();
         }
         
-		//2. jsp출력할 값 설정
 		model.addAttribute("pageResponseVO", boardService.getList(pageRequestVO));
-		//model.addAttribute("sizes", new int[] {10, 20, 50, 100});
 		model.addAttribute("sizes", codeService.getList());
-//		model.addAttribute("sizes", "10,20,50,100");
 		
 		return "board/list";
 	}
 	
 	@RequestMapping("view")
-	public String view(BoardVO board, Model model) throws ServletException, IOException {
+	public String view(BoardVO board, Model model, Authentication authentication) throws ServletException, IOException {
 		log.info("상세보기");
 		
-		model.addAttribute("board", boardService.view(board));
+		model.addAttribute("board", boardService.view(board, authentication));
 		
 		return "board/view";
 	}
 
 	@RequestMapping("jsonBoardInfo")
 	@ResponseBody
-	public Map<String, Object> jsonBoardInfo(@RequestBody BoardVO board) throws ServletException, IOException {
+	public Map<String, Object> jsonBoardInfo(@RequestBody BoardVO board, Authentication authentication) throws ServletException, IOException {
 		log.info("json 상세보기 -> {}", board);
 		//1. 처리
-		BoardVO resultVO = boardService.view(board);
+		BoardVO resultVO = boardService.view(board, authentication);
 		
 		Map<String, Object> map = new HashMap<>();
 		if (resultVO != null) { //성공

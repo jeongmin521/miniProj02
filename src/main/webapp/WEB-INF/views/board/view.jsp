@@ -54,7 +54,7 @@ function jsUpdateForm() {
 }
 </script>
 <c:choose>
-	<c:when test="${principal.member_name eq board.bwriter}">
+	<c:when test="${principal.member_name eq board.bwriter || principal.member_roles eq 'ADMIN'}">
 		<form id="viewForm" method="post" action="view">
 			<input type="hidden" name="bno" value="${board.bno}">
 			<input type="button" value="삭제" onclick="jsDelete()">
