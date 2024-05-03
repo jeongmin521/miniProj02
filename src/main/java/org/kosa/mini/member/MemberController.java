@@ -50,5 +50,14 @@ public class MemberController {
 		}
 		return result;
 	}
+	
+	@GetMapping("/myPage")
+	public String view(MemberVO member, Model model) throws ServletException, IOException {
+		log.info("마이페이지");
+		
+		model.addAttribute("member", memberService.myPage(member));
+		
+		return "member/myPage";
+	}
 
 }

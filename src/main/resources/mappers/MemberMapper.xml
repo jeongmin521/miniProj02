@@ -65,7 +65,7 @@
 		<include refid="search"/>
     </select>
     
-    <select id="view" resultType="MemberVO">
+    <select id="myPage" resultType="MemberVO">
 		select 
 			*
 		from tb_member2

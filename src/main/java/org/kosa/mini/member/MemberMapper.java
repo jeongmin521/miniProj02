@@ -1,7 +1,5 @@
 package org.kosa.mini.member;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.kosa.mini.entity.MemberVO;
 
@@ -17,5 +15,7 @@ public interface MemberMapper {
 	void loginCountClear(String email);
 	//회원가입
 	int join(MemberVO member);
+	
+	MemberVO myPage(MemberVO memberVO);
 
 }

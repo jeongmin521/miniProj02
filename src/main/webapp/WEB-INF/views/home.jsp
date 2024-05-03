@@ -35,7 +35,7 @@
 	<c:otherwise>
 		이름 : ${principal.member_name}
 		<ul class="navbar-nav">
-			<li class="nav-item"><a class="nav-link" href="/member/updateForm">회원정보</a></li>
+			<li class="nav-item"><a class="nav-link" href="/member/myPage?member_id=${principal.member_id}">마이페이지</a></li>
 			<li class="nav-item"><a class="nav-link" href="/login/logout">로그아웃</a></li>
 			<li class="nav-item"><a class="nav-link" href="/board/list">게시물 목록</a></li>
 		</ul>

@@ -33,7 +33,7 @@
 			    <a class="nav-link" href="<c:url value='/login/logout'/>" id="login_link">${principal.member_name} 로그아웃</a>
 			</li>
 			<li class="nav-item">
-			    <a class="nav-link" href="<c:url value='/member/mypage'/>" id="mypage_link">나의정보</a>
+			    <a class="nav-link" href="<c:url value='/member/myPage?member_id=${principal.member_id}'/>" id="mypage_link">나의정보</a>
 			</li>
   		</c:otherwise>
   	</c:choose>

@@ -53,4 +53,11 @@ public class MemberService implements UserDetailsService {
 		return result;
 	}
 	
+	public MemberVO myPage(MemberVO member)  {
+		MemberVO resultVO = memberMapper.myPage(member);
+		log.info(resultVO.toString());
+		
+		return resultVO;
+	}	
+	
 }
