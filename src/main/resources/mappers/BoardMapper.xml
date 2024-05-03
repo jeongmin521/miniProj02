@@ -15,7 +15,7 @@
     <select id="getList" resultType="BoardVO">
 		select 
 			b.*, m.member_name bwriter  
-		from tb_board b inner join tb_member m on b.member_id = m.member_id
+		from tb_board b inner join tb_member2 m on b.member_id = m.member_id
 		<include refid="search"/>
 		order by bno desc limit #{skip}, #{size}
     </select>
@@ -30,7 +30,7 @@
 	<select id="view" resultType="BoardVO">
 		select 
 			b.*, m.member_name bwriter  
-		from tb_board b inner join tb_member m on b.member_id = m.member_id  
+		from tb_board b inner join tb_member2 m on b.member_id = m.member_id  
 		where bno = #{bno}
 	</select>
 	

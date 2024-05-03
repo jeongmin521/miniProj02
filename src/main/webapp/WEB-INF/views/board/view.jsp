@@ -53,13 +53,20 @@ function jsUpdateForm() {
 	}	
 }
 </script>
-<!-- 두개의 폼을 하나로 합치는 방법 , js를 사용하여 처리  -->
-	<form id="viewForm" method="post" action="view">
-		<input type="hidden" name="bno" value="${board.bno}">
-		<input type="button" value="삭제" onclick="jsDelete()">
-		<input type="button" value="수정" onclick="location.href='updateForm?bno=${board.bno}'">
+<c:choose>
+	<c:when test="${principal.member_name eq board.bwriter}">
+		<form id="viewForm" method="post" action="view">
+			<input type="hidden" name="bno" value="${board.bno}">
+			<input type="button" value="삭제" onclick="jsDelete()">
+			<input type="button" value="수정" onclick="location.href='updateForm?bno=${board.bno}'">
+			<input type="button" value="목록" onclick ="location.href='list'">
+		</form> 
+	</c:when>
+	<c:otherwise>
 		<input type="button" value="목록" onclick ="location.href='list'">
-	</form>     
+	</c:otherwise>
+</c:choose>
+
 
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
